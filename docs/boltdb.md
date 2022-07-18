@@ -8,6 +8,8 @@
 
 ### Cursor
 
+### node
+
 ### Page
 page 的结构
 
@@ -17,6 +19,15 @@ page 的结构
 
 #### Page Item
 
+```go
+// leafPageElement represents a node on a leaf page.
+type leafPageElement struct {
+	flags uint32
+	pos   uint32
+	ksize uint32
+	vsize uint32
+}
+```
 
 ## Meta
 
