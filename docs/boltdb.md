@@ -8,10 +8,11 @@
 
 ### Cursor
 
-### node
-
 ### Page
 page 的结构
+
+### node
+node 是 page 加载到内存以后的结构。
 
 #### Page Header
 
