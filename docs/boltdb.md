@@ -16,6 +16,16 @@ node 是 page 加载到内存以后的结构。
 
 #### Page Header
 
+```go
+type page struct {
+  	id       pgid
+	flags    uint16
+	count    uint16
+	overflow uint32
+}
+```
+
+
 #### Page Body
 
 #### Page Item
