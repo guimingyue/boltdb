@@ -42,15 +42,14 @@ type leafPageElement struct {
 
 ## Meta
 
-前四个 Page
 db 在初始化时（函数`func (db *DB) init() error`），会初始化两个 meta page，而 meta 在 page 中位于 page header 之后。
 |page header|meta|
 
-### Page 1
-
-### Page 2
+### Page 1 & Page 2
+meta page
 
 ### Page 3
+freelist Page
 
 ### Page 4
-
+first leaf page
