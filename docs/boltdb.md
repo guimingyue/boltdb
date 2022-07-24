@@ -53,3 +53,13 @@ freelist Page
 
 ### Page 4
 first leaf page
+
+## 函数介绍
+`func (db *DB) init() error`
+当打开一个 boltdb 数据库文件的时候，如果文件大小为 0，那么就初始化这个数据库。
+* 创建一个大小为 4 个页（page）大小的缓冲区（字节数组）。
+* 前 2 个页置为 meta page。
+* 第 3 个页置为 freelist page。
+* 第 4 个页置位 B+ 树的叶子 page。
+* 将这 4 个 page flush 到数据库文件中。
+
