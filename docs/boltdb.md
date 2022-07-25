@@ -53,6 +53,9 @@ freelist Page
 
 ### Page 4
 first leaf page
+这个页是第一个 B+ 树的数据页，
+比如在 Cursor 中会有根据 key 查找的操作，那么查找操作一定会遍历 B+ 树，在 `func (c *Cursor) seek(seek []byte) (key []byte, value []byte, flags uint32)` 这个方法中，会使用 c.bucket.root 这个 page 开始查找。这个 page 实际上是在 tx.init 函数中赋值的 `*tx.root.bucket = tx.meta.root`，而 tx.meta.root 实际上是 db.meta().root，在 db.init 的初始化时，会将 m.root = bucket{root: 3} 赋值给 root。
+
 
 ## 函数介绍
 `func (db *DB) init() error`
