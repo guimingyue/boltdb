@@ -6,7 +6,7 @@
 
 ### Bucket
 
-Bucket 类似于关系型数据库（比如 MySQL）中的一张表，但是它是 Key-Value 形式的，而不是二维表，在一个 Bucket 中的 key 是唯一的。在 BoltDB 中，Bucket 之间可以是从属关系，也就是一个 Bucket 实例可以有子 Bucket，比如整个 BoltDB 实例可以看成是一个根 Bucket，每创建一个新的 Bucket，就为根 Bucket 创建一个子 Bucket。在 Bucket 中有属性`buckets  map[string]*Bucket` 来存储子 Bucket。每当打开或者创建一个新的 Bucket，就会创建一个子 Bucket 对象。
+Bucket 类似于关系型数据库（比如 MySQL）中的一张表，但是它是 Key-Value 形式的，而不是二维表，在一个 Bucket 中的 key 是唯一的。在 BoltDB 中，Bucket 之间可以是从属关系，也就是一个 Bucket 实例可以有子 Bucket，比如整个 BoltDB 实例可以看成是一个根 Bucket，每创建一个新的 Bucket，就为根 Bucket 创建一个子 Bucket。在 Bucket 中有属性`buckets  map[string]*Bucket` 来存储子 Bucket。每当打开（`func (tx *Tx) Bucket(name []byte) *Bucket`）或者创建（`func (tx *Tx) CreateBucket(name []byte) (*Bucket, error)`）一个新的 Bucket，就会创建一个子 Bucket 对象。
 
 ### Cursor
 
