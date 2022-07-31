@@ -6,6 +6,8 @@
 
 ### Bucket
 
+Bucket 类似于关系型数据库（比如 MySQL）中的一张表，但是它是 Key-Value 形式的，而不是二维表，在一个 Bucket 中的 key 是唯一的。
+
 ### Cursor
 
 ### Page
