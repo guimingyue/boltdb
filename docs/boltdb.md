@@ -63,8 +63,11 @@ first leaf page
 `func (db *DB) init() error`
 当打开一个 boltdb 数据库文件的时候，如果文件大小为 0，那么就初始化这个数据库。
 * 创建一个大小为 4 个页（page）大小的缓冲区（字节数组）。
-* 前 2 个页置为 meta page。
+* 前 2 个页置为 meta page，每个第 0 个 meta 的 txid 为 0，第一个 meta 的 txid 为 1。
 * 第 3 个页置为 freelist page。
 * 第 4 个页置位 B+ 树的叶子 page。
 * 将这 4 个 page flush 到数据库文件中。
+
+`func (tx *Tx) init(db *DB)`
+事务初始化，由于 txid 会取较新的 meta 中的 txid 再加 1，所以第一个写事务的 txid 是 2，读事务的 txid 为事务开始时的较新的 meta 的事务 id
 
