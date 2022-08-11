@@ -71,3 +71,5 @@ first leaf page
 `func (tx *Tx) init(db *DB)`
 事务初始化，由于 txid 会取较新的 meta 中的 txid 再加 1，所以第一个写事务的 txid 是 2，读事务的 txid 为事务开始时的较新的 meta 的事务 id
 
+`func (tx *Tx) rollback()`
+事务回滚，对于写事务，要么从 db.meta() 中的 freelist page 中恢复，要么从 db 文件中恢复。
