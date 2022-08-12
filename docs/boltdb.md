@@ -73,3 +73,7 @@ first leaf page
 
 `func (tx *Tx) rollback()`
 事务回滚，对于写事务，要么从 db.meta() 中的 freelist page 中恢复，要么从 db 文件中恢复。
+
+`func (n *node) spill()` 
+node 节点写入到物理 page 中，这个过程中如果 n 的中数据大于某个值（由填充因子`FillPercent`决定）就会分裂成多个 node。并且还会字底向上的 spill，也就是会将父节点也重新写到新的 page 中。
+
