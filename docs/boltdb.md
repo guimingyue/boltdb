@@ -80,3 +80,20 @@ node 节点写入到物理 page 中，这个过程中如果 n 的中数据大于
 `func (tx *Tx) allocate(count int) (*page, error)`
 事务中新的页的分配，会先调用 `db.allocate` 函数创建 page，然后将该 page 记录到 `tx.pages` 中，`tx.pages[p.id] = p`。所以调用该方法而不是直接调用 db.allocate 是为了记录事务中分配的新的 page。
 
+`func (c *Cursor) seek(seek []byte) (key []byte, value []byte, flags uint32)`
+在 Cursor 所引用的 bucket 中查找 seek（key）对应的 key，value 和这对 key-value 对应的标识，标识是标记 key， value 的类型，是代表 bucket 的信息，或是数据。标识的几个常量分别是
+
+```go
+const (
+	branchPageFlag   = 0x01
+	leafPageFlag     = 0x02
+	metaPageFlag     = 0x04
+	freelistPageFlag = 0x10
+)
+
+const (
+	bucketLeafFlag = 0x01
+)
+```
+
+seek 函数会调用 `func (c *Cursor) search(key []byte, pgid pgid)` 从一颗 B+ 树的根节点开始查找对应的 key 是否存在。
