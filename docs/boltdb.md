@@ -96,4 +96,8 @@ const (
 )
 ```
 
-seek 函数会调用 `func (c *Cursor) search(key []byte, pgid pgid)` 从一颗 B+ 树的根节点开始查找对应的 key 是否存在。
+seek 函数会调用 `func (c *Cursor) search(key []byte, pgid pgid)` 从一颗 B+ 树的根节点开始查找对应的 key 是否存在。整个查找 B+ 树的路径中经过的 page（或 node）都会记录在 Cursor.stack 中。
+
+`func (c *Cursor) node() *node`
+读取 Cursor.stack 中的 page 到 node 。
+
