@@ -75,7 +75,7 @@ first leaf page
 事务回滚，对于写事务，要么从 db.meta() 中的 freelist page 中恢复，要么从 db 文件中恢复。
 
 `func (n *node) spill()` 
-node 节点写入到物理 page 中，这个过程中如果 n 的中数据大于某个值（由填充因子`FillPercent`决定）就会分裂成多个 node。并且还会字底向上的 spill，也就是会将父节点也重新写到新的 page 中。
+node 节点写入到物理 page 中，这个过程中如果 n 的中数据大于某个值（由填充因子`FillPercent`决定）就会分裂成多个 node。自顶向下进行 spill，也就是会将父节点也重新写到新的 page 中。
 
 `func (tx *Tx) allocate(count int) (*page, error)`
 事务中新的页的分配，会先调用 `db.allocate` 函数创建 page，然后将该 page 记录到 `tx.pages` 中，`tx.pages[p.id] = p`。所以调用该方法而不是直接调用 db.allocate 是为了记录事务中分配的新的 page。
